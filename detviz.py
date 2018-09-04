@@ -1,13 +1,14 @@
 # visualize determinants
 # inspired by 3BLUE1BROWN youtube
+# Works only for a 2x2 matrix
 
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 
 XMIN = -3
-XMAX = 50
+XMAX = 20
 YMIN = -3
-YMAX = 30
+YMAX = 20
 
 class Point:
 
@@ -33,17 +34,22 @@ def plot_bounds():
     return [XMIN, XMAX, YMIN, YMAX]
 
 ## Setup the plot before drawing matrices and vectors
-def plot_setup():
+def plot_setup(plt_name = "GRAPH"):
     plt.subplot(1, 1, 1)
-    plt.title("GRAPH")
+    plt.title(plt_name)
     plt.axis('equal')
     plt.xticks(range(XMIN, XMAX, 1))
     plt.yticks(range(YMIN, YMAX, 1))
-    plt.xlabel("xs")
-    plt.ylabel("ys")
+    plt.xlabel("X")
+    plt.ylabel("Y")
     plt.grid(color='gray', linestyle = '-', linewidth=0.1)
+
     # draw axes
     draw_axes()
+
+    ## Full screen plot always
+    mng = plt.get_current_fig_manager()
+    mng.full_screen_toggle()
 
 ## draw a line on to the plt
 def draw_line(pt1, pt2, color_ = "r", linewidth_ = 1, linestyle_ = "-"):
@@ -210,30 +216,4 @@ def draw_axes_for_matrix(m, color = "r", linewidth = 1, linestyle = "-"):
             pt = Point(V[0], V[1])
             draw_line_slope_point(slope_v2, pt, color, linewidth, linestyle)
 
-## main ########################################################################
-
-m = [[3, 1], [2, 2]] # list of columns
-#m = [[0, 1], [3, 0]]
-munit = [[1, 0], [0, 1]]
-
-## Full screen plot always #####################################################
-mng = plt.get_current_fig_manager()
-mng.full_screen_toggle()
-
-## Draw unit vectors ###########################################################
-plot_setup()
-
-# draw matrix
-draw_matrix(munit, "maroon", 0.5, "-")
-
-plt.show()
-
-## Draw matrix m; properly scaled ##############################################
-plot_setup()
-
-# draw matrix
-draw_matrix(m, "maroon", 1, "-", llgram = False)
-# draw axes alone the matrix
-draw_axes_for_matrix(m, color = 'red', linewidth = 0.1, linestyle = '-')
-
-plt.show()
+################################################################################
