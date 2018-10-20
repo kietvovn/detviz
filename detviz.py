@@ -5,9 +5,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 
-XMIN = -3
+XMIN = -10
 XMAX = 20
-YMIN = -3
+YMIN = -10
 YMAX = 20
 
 class Point:
